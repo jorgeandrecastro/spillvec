@@ -1,0 +1,35 @@
+[package]
+name = "spillvec"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+authors = ["Jorge Andre Castro"]
+description = "Vec qui déborde sur le disque au-delà d'un seuil (éléments ou octets), sans aucune dépendance, avec checksums d'intégrité."
+license = "GPL-2.0-or-later"
+repository = "https://github.com/jorgeandrecastro/spillvec"
+readme = "README.md"
+keywords = ["vec", "disk", "spill", "out-of-core", "temporary-file"]
+categories = ["data-structures", "filesystem", "algorithms"]
+include = [
+    "src/**/*",
+    "examples/**/*",
+    "tests/**/*",
+    "Cargo.toml",
+    "README.md",
+]
+
+[lib]
+name = "spillvec"
+path = "src/lib.rs"
+
+[[example]]
+name = "demo"
+path = "examples/demo.rs"
+
+[dependencies]
+# Aucune dépendance externe : sérialisation, CRC32 et fichier temporaire sont faits maison (std uniquement).
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
